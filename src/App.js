@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import styled from "styled-components";
+import TipForm from "./components/TipForm";
+import TipResult from "./components/TipResult";
 
-function App() {
+const Title = styled.h1`
+  text-transform: uppercase;
+  color: hsl(183, 100%, 15%);
+  font-weight: 400;
+  letter-spacing: 1rem;
+  width: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 3rem auto;
+  font-size: 1.5rem;
+`;
+
+const ContainerTip = styled.div`
+  background: hsl(0, 0%, 100%);
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 3rem;
+  border-radius: 1rem;
+`;
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Title>
+        spli<span>tter</span>
+      </Title>
+
+      <ContainerTip>
+        <TipForm />
+        <TipResult />
+      </ContainerTip>
     </div>
   );
-}
+};
 
 export default App;
