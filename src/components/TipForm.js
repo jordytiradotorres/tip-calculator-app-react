@@ -10,11 +10,15 @@ const Container = styled.div`
 
 const GroupBtn = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
   gap: 0.7rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const Title = styled.div`
@@ -34,7 +38,7 @@ const Input = styled.input`
   color: hsl(184, 14%, 56%);
   font-family: "Space mono";
   font-size: 1rem;
-  margin-bottom: ${(props) => props.margin && "2rem"};
+  margin-bottom: ${(props) => props.dollar && "2rem"};
   outline: none;
 `;
 
@@ -49,7 +53,7 @@ const TipForm = () => {
     <div>
       <Container>
         <Title>Bill</Title>
-        <Input type="text" margin value="0" />
+        <Input type="text" dollar value="0" />
         <Img src={iconDollar} alt="dollar" />
       </Container>
 

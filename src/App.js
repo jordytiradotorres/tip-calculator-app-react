@@ -10,6 +10,7 @@ const Title = styled.h1`
   width: 150px;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin: 3rem auto;
   font-size: 1.5rem;
 `;
@@ -17,10 +18,14 @@ const Title = styled.h1`
 const ContainerTip = styled.div`
   background: hsl(0, 0%, 100%);
   padding: 2rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 3rem;
   border-radius: 1rem;
+
+  @media (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    padding: 1rem;
+  }
 `;
 
 const App = () => {

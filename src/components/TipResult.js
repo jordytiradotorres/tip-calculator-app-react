@@ -6,14 +6,23 @@ const Wrapper = styled.section`
   background-color: hsl(183, 100%, 15%);
   padding: 2rem;
   border-radius: 0.5rem;
+
+  @media (max-width: 768px) {
+    margin-top: 2rem;
+    padding: 1rem;
+  }
 `;
 
 const AmountTip = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
-  width: 350px;
+  margin-bottom: 1rem;
+
+  @media (min-width: 768px) {
+    margin-bottom: 1.5rem;
+    width: 350px;
+  }
 `;
 
 const H3 = styled.h3`
@@ -31,9 +40,13 @@ const H3 = styled.h3`
 `;
 
 const Result = styled.output`
-  font-size: 3rem;
+  font-size: 2rem;
   font-weight: 700;
   color: hsl(172, 67%, 45%);
+
+  @media (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const TipResult = () => {
