@@ -14,12 +14,18 @@ body {
   font-family: var(--font-space-mono);
   margin: 0;
   overflow-x: hidden;
-  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-color: var(--light-grayish-cyan);
+}
+
+@media (min-width: 768px) {
+  body {
+    display: flex;
+    min-height: initial;
+  }
 }
 
 figure,
