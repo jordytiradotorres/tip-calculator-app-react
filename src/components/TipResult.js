@@ -49,7 +49,47 @@ const Result = styled.output`
   }
 `;
 
-const TipResult = () => {
+const TipResult = ({
+  dollarValue,
+  personNumber,
+  setDollarValue,
+  percentageValue,
+  percentageCustomValue,
+}) => {
+  dollarValue = Number(dollarValue);
+  personNumber = Number(personNumber);
+
+  const tipAmount = () => {
+    if (personNumber === 0) {
+      return "0.00";
+    } else if (
+      percentageCustomValue !== "Custom" &&
+      percentageCustomValue !== 0
+    ) {
+      return (
+        (dollarValue * `0.${percentageCustomValue}`) /
+        personNumber
+      ).toFixed(2);
+    } else {
+      return ((dollarValue * `0.${percentageValue}`) / personNumber).toFixed(2);
+    }
+  };
+
+  const totalPerson = () => {
+    if (percentageCustomValue !== "Custom") {
+      return (dollarValue * `0.${percentageCustomValue}`).toFixed(2);
+    } else {
+      return (dollarValue * `0.${percentageValue}`).toFixed(2);
+    }
+  };
+
+  const handleReset = () => {
+    setDollarValue({
+      dollarValue: 0,
+      personNumber: 0,
+    });
+  };
+
   return (
     <Wrapper>
       <AmountTip>
@@ -57,7 +97,7 @@ const TipResult = () => {
           Tip Amount <span>/ person</span>
         </H3>
 
-        <Result>$0.00</Result>
+        <Result>${isNaN(tipAmount()) ? "0.00" : tipAmount()}</Result>
       </AmountTip>
 
       <AmountTip>
@@ -65,10 +105,10 @@ const TipResult = () => {
           Total <span>/ person</span>
         </H3>
 
-        <Result>$0.00</Result>
+        <Result>${isNaN(totalPerson()) ? "0.00" : totalPerson()}</Result>
       </AmountTip>
 
-      <Button reset large>
+      <Button reset large onClick={handleReset} disabled={dollarValue === 0}>
         Reset
       </Button>
     </Wrapper>

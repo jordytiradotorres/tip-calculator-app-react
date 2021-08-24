@@ -23,6 +23,10 @@ const Button = styled.button`
       props.reset ? "hsl(185, 41%, 84%)" : "hsl(172, 67%, 45%)"};
     color: hsl(183, 100%, 15%);
   }
+
+  &:disabled {
+    opacity: 0.2;
+  }
 `;
 
 export default Button;

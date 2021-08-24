@@ -25,6 +25,8 @@ body {
   body {
     display: flex;
     min-height: initial;
+    max-width: 960px;
+    margin: auto;
   }
 }
 

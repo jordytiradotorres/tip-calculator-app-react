@@ -3,6 +3,7 @@ import Button from "./Button";
 
 import iconDollar from "../images/icon-dollar.svg";
 import iconPerson from "../images/icon-person.svg";
+import { useEffect, useRef } from "react";
 
 const Container = styled.div`
   position: relative;
@@ -48,30 +49,99 @@ const Img = styled.img`
   left: 1rem;
 `;
 
-const TipForm = () => {
+const MessageError = styled.p`
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #bf2d2d;
+`;
+
+const InputPercentageCustom = styled.input`
+  background-color: hsl(189, 41%, 97%);
+  border: none;
+  border-radius: 0.2rem;
+  outline: none;
+  text-align: right;
+  font-family: "Space mono";
+  font-weight: 700;
+  color: hsl(184, 14%, 56%);
+  font-size: 1rem;
+  padding: 0.5rem 1rem 0.5rem;
+  min-width: 100px;
+`;
+
+const TipForm = ({
+  dollarValue,
+  personNumber,
+  handleChange,
+  handleClickValue,
+  handleChangeCustom,
+  handleFocusCustom,
+  percentageCustomValue,
+}) => {
+  dollarValue = Number(dollarValue);
+  personNumber = Number(personNumber);
+
+  const dollarRef = useRef();
+  const personRef = useRef();
+  const inputCustomValue = useRef();
+
+  useEffect(() => {
+    if (personRef.current.value === "0") {
+      personRef.current.style.border = "thin solid #bf2d2d";
+      dollarRef.current.style.border = "thin solid hsl(172,67%,45%)";
+    } else {
+      personRef.current.style.border = "thin solid transparent";
+      dollarRef.current.style.border = "thin solid transparent";
+    }
+  }, [personNumber]);
+
   return (
     <div>
       <Container>
         <Title>Bill</Title>
-        <Input type="text" dollar value="0" />
+
+        <Input
+          type="number"
+          min="0"
+          name="dollarValue"
+          dollar
+          value={dollarValue}
+          onChange={handleChange}
+          ref={dollarRef}
+        />
         <Img src={iconDollar} alt="dollar" />
       </Container>
 
       <div>
         <Title>Select Tip %</Title>
         <GroupBtn>
-          <Button>5%</Button>
-          <Button>10%</Button>
-          <Button>15%</Button>
-          <Button>25%</Button>
-          <Button>50%</Button>
-          <Button>Custom</Button>
+          <Button onClick={handleClickValue}>5%</Button>
+          <Button onClick={handleClickValue}>10%</Button>
+          <Button onClick={handleClickValue}>15%</Button>
+          <Button onClick={handleClickValue}>25%</Button>
+          <Button onClick={handleClickValue}>50%</Button>
+          <InputPercentageCustom
+            type="text"
+            value={percentageCustomValue}
+            onChange={handleChangeCustom}
+            onFocus={handleFocusCustom}
+            ref={inputCustomValue}
+          />
         </GroupBtn>
       </div>
 
       <Container>
         <Title>Number of People</Title>
-        <Input type="text" value="0" />
+        {personNumber === 0 && <MessageError>Can't be zero</MessageError>}
+        <Input
+          type="number"
+          min="0"
+          value={personNumber}
+          name="personNumber"
+          onChange={handleChange}
+          ref={personRef}
+        />
         <Img src={iconPerson} alt="person" />
       </Container>
     </div>
