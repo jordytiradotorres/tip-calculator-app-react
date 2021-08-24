@@ -45,16 +45,21 @@ const App = () => {
     });
   };
 
-  const handleClickValue = (e) => {
-    setPercentageValue(parseInt(e.target.textContent.slice(0, -1)));
-    setPercentageCustomValue("Custom");
-
-    let parent = e.target.parentElement.children;
+  const activeButton = (parent) => {
     for (let i = 0; i < parent.length; i++) {
       parent[i].style.backgroundColor = "hsl(183,100%,15%)";
       parent[parent.length - 1].style.backgroundColor = "hsl(189,41%,97%)";
       parent[parent.length - 1].style.border = "thin solid transparent";
     }
+  };
+
+  const handleClickValue = (e) => {
+    setPercentageValue(parseInt(e.target.textContent.slice(0, -1)));
+    setPercentageCustomValue("Custom");
+
+    let parent = e.target.parentElement.children;
+    activeButton(parent);
+
     e.target.style.backgroundColor = "hsl(172,67%,45%)";
   };
 
