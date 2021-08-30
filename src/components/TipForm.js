@@ -85,6 +85,7 @@ const TipForm = ({
   const dollarRef = useRef();
   const personRef = useRef();
   const inputCustomValue = useRef();
+  const groupBtn = useRef();
 
   useEffect(() => {
     if (personRef.current.value === "0") {
@@ -95,6 +96,17 @@ const TipForm = ({
       dollarRef.current.style.border = "thin solid transparent";
     }
   }, [personNumber]);
+
+  useEffect(() => {
+    if (percentageCustomValue >= 0) {
+      let buttons = [...groupBtn.current.querySelectorAll("button")];
+
+      for (const button of buttons) {
+        button.style.backgroundColor = "hsl(183,100%,15%)";
+        button.style.color = "white";
+      }
+    }
+  }, [percentageCustomValue]);
 
   return (
     <div>
@@ -115,7 +127,7 @@ const TipForm = ({
 
       <div>
         <Title>Select Tip %</Title>
-        <GroupBtn>
+        <GroupBtn ref={groupBtn}>
           <Button onClick={handleClickValue}>5%</Button>
           <Button onClick={handleClickValue}>10%</Button>
           <Button onClick={handleClickValue}>15%</Button>
