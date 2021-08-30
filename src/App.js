@@ -91,6 +91,8 @@ const App = () => {
           setDollarValue={setDollarValue}
           percentageValue={percentageValue}
           percentageCustomValue={percentageCustomValue}
+          setPercentageValue={setPercentageValue}
+          setPercentageCustomValue={setPercentageCustomValue}
         />
       </ContainerTip>
     </div>

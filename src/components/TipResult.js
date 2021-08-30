@@ -54,6 +54,8 @@ const TipResult = ({
   setDollarValue,
   percentageValue,
   percentageCustomValue,
+  setPercentageCustomValue,
+  setPercentageValue,
 }) => {
   dollarValue = Number(dollarValue);
   personNumber = Number(personNumber);
@@ -61,24 +63,38 @@ const TipResult = ({
   const tipAmount = () => {
     if (personNumber === 0) {
       return "0.00";
-    } else if (
-      percentageCustomValue !== "Custom" &&
-      percentageCustomValue !== 0
-    ) {
+    }
+    if (percentageCustomValue !== "Custom" && percentageCustomValue <= 9) {
       return (
-        (dollarValue * `0.${percentageCustomValue}`) /
+        (dollarValue * `0.0${percentageCustomValue}`) /
         personNumber
       ).toFixed(2);
     } else {
-      return ((dollarValue * `0.${percentageValue}`) / personNumber).toFixed(2);
+      if (percentageValue <= 9) {
+        return ((dollarValue * `0.0${percentageValue}`) / personNumber).toFixed(
+          2
+        );
+      } else {
+        return ((dollarValue * `0.${percentageValue}`) / personNumber).toFixed(
+          2
+        );
+      }
     }
   };
 
   const totalPerson = () => {
     if (percentageCustomValue !== "Custom") {
-      return (dollarValue * `0.${percentageCustomValue}`).toFixed(2);
+      if (percentageCustomValue <= 9) {
+        return (dollarValue * `0.0${percentageCustomValue}`).toFixed(2);
+      } else {
+        return (dollarValue * `0.${percentageCustomValue}`).toFixed(2);
+      }
     } else {
-      return (dollarValue * `0.${percentageValue}`).toFixed(2);
+      if (percentageValue <= 9) {
+        return (dollarValue * `0.0${percentageValue}`).toFixed(2);
+      } else {
+        return (dollarValue * `0.${percentageValue}`).toFixed(2);
+      }
     }
   };
 
@@ -87,6 +103,8 @@ const TipResult = ({
       dollarValue: 0,
       personNumber: 0,
     });
+    setPercentageCustomValue("Custom");
+    setPercentageValue(0);
   };
 
   return (
